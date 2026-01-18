@@ -6,7 +6,7 @@ export const resumeData = {
       email: "abhilash.durgam0@gmail.com",
       phone: "7993380890",
       location: "Guntur, Andhra Pradesh",
-      linkedin: "https://www.linkedin.com/in/abhilash-durgam",
+      linkedin: "https://www.linkedin.com/in/abhilash-durgam/",
       github: "https://github.com/VisualcodeAbhi"
     },
     about: "I am a dedicated Software Developer and quick learner with a strong foundation in Python Full-stack development. I have hands-on experience building web applications using Flask, JavaScript, and MySQL, with a focus on creating scalable and responsive solutions.",
