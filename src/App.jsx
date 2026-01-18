@@ -37,7 +37,9 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Thank you, ${formData.name}! Your message has been sent (simulated).`);
+    const subject = `Portfolio Contact from ${formData.name}`;
+    const body = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
+    window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
     setFormData({ name: '', email: '', message: '' });
   };
 
