@@ -45,14 +45,6 @@ function App() {
 
   return (
     <div className="portfolio-container">
-
-      {/* Theme Toggle Button */}
-      <div style={{ position: 'fixed', top: '1rem', right: '1rem', zIndex: 1000 }}>
-        <button onClick={toggleTheme} style={{ fontSize: '1.2rem', padding: '0.5rem' }}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-      </div>
-
       {/* Hero Section */}
       <section className="hero">
         <h1>{personalInfo.name}</h1>
