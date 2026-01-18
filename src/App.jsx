@@ -60,7 +60,7 @@ function App() {
           {personalInfo.location} | {personalInfo.phone}
         </div>
         <div style={{ marginTop: '1.5rem' }}>
-          <a href={`mailto:${personalInfo.email}`} style={{ marginRight: '1rem' }}>Email Me</a>
+          <a href={`mailto:${personalInfo.email}`} style={{ marginRight: '1rem' }}>{personalInfo.email}</a>
           <a href={personalInfo.linkedin} target="_blank" rel="noreferrer" style={{ marginRight: '1rem' }}>LinkedIn</a>
           <a href={personalInfo.github} target="_blank" rel="noreferrer">GitHub</a>
         </div>
