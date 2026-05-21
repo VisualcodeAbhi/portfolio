@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@theme {
+  --color-obsidian: #030303;
+  --color-darker: #09090b;
+  --color-neonViolet: #8b5cf6;
+  --color-neonIndigo: #6366f1;
+  --color-neonBlue: #06b6d4;
+  --color-neonCyan: #00f5ff;
+  
+  --font-sans: "Poppins", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  
+  --shadow-premium: 0 10px 40px -10px rgba(0, 0, 0, 0.8), 
+                    inset 0 1px 1px rgba(255, 255, 255, 0.03);
+  --shadow-glowViolet: 0 0 35px -5px rgba(139, 92, 246, 0.25),
+                       inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  --shadow-glowBlue: 0 0 30px -5px rgba(6, 182, 212, 0.4);
+  --shadow-glowIndigo: 0 0 35px -5px rgba(99, 102, 241, 0.45);
+}
+
+@layer base {
+  body {
+    @apply bg-obsidian text-slate-100 font-sans antialiased;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.03) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.03) 0%, transparent 40%);
+  }
+
+  /* Custom Premium Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #030303;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.3);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(6, 182, 212, 0.6);
+  }
+
+  ::selection {
+    @apply bg-neonViolet/30 text-white;
+  }
+}
+
+@layer components {
+  /* Premium Glassmorphic Overlay Panel */
+  .glass-panel {
+    @apply bg-[#0e0e12]/60 border border-white/5 backdrop-blur-xl shadow-premium;
+  }
+
+  /* High fidelity Glowing borders */
+  .glow-card {
+    @apply relative overflow-hidden transition-all duration-500 rounded-2xl border border-white/5 bg-[#09090c]/70 hover:border-neonViolet/40 hover:shadow-glowViolet;
+  }
+
+  /* Premium Gradient Text Utility */
+  .gradient-text {
+    @apply bg-gradient-to-r from-neonViolet via-neonIndigo to-neonBlue bg-clip-text text-transparent;
+  }
+  
+  .gradient-text-blue {
+    @apply bg-gradient-to-r from-neonBlue to-neonCyan bg-clip-text text-transparent;
+  }
+
+  .gradient-text-gold {
+    @apply bg-gradient-to-r from-[#f9e6b3] via-[#ebd07f] to-[#c29d3c] bg-clip-text text-transparent;
+  }
+
+  /* Spotlight Grid Mesh styling */
+  .grid-bg {
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  }
+
+  /* Custom skill bar animated background */
+  .skill-bar-fill {
+    @apply h-full rounded-full bg-gradient-to-r from-neonViolet to-neonBlue shadow-glowBlue transition-all duration-1000 ease-out;
+  }
+}
+
+/* Dynamic glow blobs floating in the background */
+.glow-blob {
+  @apply absolute rounded-full filter blur-[150px] opacity-25 mix-blend-screen pointer-events-none;
+  animation: blobDrift 25s infinite alternate ease-in-out;
+}
+
+@keyframes blobDrift {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(40px, -60px) scale(1.15); }
+  66% { transform: translate(-50px, 30px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
