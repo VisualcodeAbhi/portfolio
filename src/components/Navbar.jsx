@@ -2,38 +2,54 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Code2 } from "lucide-react";
 
-const navItems = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
-  { name: "Projects", href: "#projects" },
-  { name: "Skills", href: "#skills" },
-  { name: "Testimonials", href: "#testimonials" },
-  { name: "Contact", href: "#contact" },
-];
-
-export default function Navbar() {
+export default function Navbar({ currentPath }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("Home");
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
+  const isProjectsPage = currentPath === "#/projects";
 
-      // Simple active section tracker
-      const sections = navItems.map((item) => {
-        const el = document.querySelector(item.href);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          return {
-            name: item.name,
-            top: rect.top + window.scrollY - 150,
-            bottom: rect.bottom + window.scrollY - 150,
-          };
-        }
-        return null;
-      }).filter(Boolean);
+  const navItems = [
+    { name: "Home", href: isProjectsPage ? "#/" : "#home" },
+    { name: "About", href: isProjectsPage ? "#/about" : "#about" },
+    { name: "Services", href: isProjectsPage ? "#/services" : "#services" },
+    { name: "Projects", href: "#/projects" },
+    { name: "Skills", href: isProjectsPage ? "#/skills" : "#skills" },
+    { name: "Testimonials", href: isProjectsPage ? "#/testimonials" : "#testimonials" },
+    { name: "Contact", href: isProjectsPage ? "#/contact" : "#contact" },
+  ];
+
+  useEffect(() => {
+    const handleScrollState = () => {
+      setScrolled(window.scrollY > 30);
+    };
+
+    window.addEventListener("scroll", handleScrollState);
+    return () => window.removeEventListener("scroll", handleScrollState);
+  }, []);
+
+  useEffect(() => {
+    if (isProjectsPage) {
+      setActiveSection("Projects");
+      return;
+    }
+
+    const handleScroll = () => {
+      const sections = navItems
+        .filter((item) => item.name !== "Projects")
+        .map((item) => {
+          const el = document.querySelector(item.href);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            return {
+              name: item.name,
+              top: rect.top + window.scrollY - 180,
+              bottom: rect.bottom + window.scrollY - 180,
+            };
+          }
+          return null;
+        })
+        .filter(Boolean);
 
       const scrollPos = window.scrollY;
       const current = sections.find(
@@ -44,9 +60,12 @@ export default function Navbar() {
       }
     };
 
+    // Run initial check
+    handleScroll();
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [currentPath, isProjectsPage]);
 
   return (
     <>
@@ -62,7 +81,7 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
           {/* Logo Brand */}
-          <a href="#home" className="flex items-center gap-2 group">
+          <a href={isProjectsPage ? "#/" : "#home"} className="flex items-center gap-2 group">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-neonViolet to-neonBlue flex items-center justify-center shadow-glowBlue transition-transform duration-300 group-hover:scale-105">
               <Code2 className="w-5 h-5 text-white" />
             </div>

@@ -1,7 +1,9 @@
 import React from "react";
 import { ArrowUp, Code2, Github, Linkedin, Mail, Twitter } from "lucide-react";
 
-export default function Footer() {
+export default function Footer({ currentPath }) {
+  const isProjectsPage = currentPath === "#/projects";
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -14,7 +16,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
         {/* Branding Brand */}
         <div className="flex flex-col items-center md:items-start gap-2">
-          <a href="#home" className="flex items-center gap-2 group">
+          <a href={isProjectsPage ? "#/" : "#home"} className="flex items-center gap-2 group">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-neonViolet to-neonBlue flex items-center justify-center shadow-glowBlue transition-transform duration-300 group-hover:scale-105">
               <Code2 className="w-4.5 h-4.5 text-white" />
             </div>
