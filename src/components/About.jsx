@@ -85,11 +85,11 @@ export default function About() {
               {/* Premium Backside Floating Glow Blobs */}
               <div className="absolute -inset-1.5 bg-gradient-to-tr from-neonViolet to-neonBlue rounded-3xl blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-500 -z-10" />
               
-              {/* Central Glowing Avatar Circle with Letter "A" */}
-              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-tr from-neonViolet to-neonBlue flex items-center justify-center shadow-glowIndigo mb-6 group-hover:scale-105 transition-transform duration-500 relative">
-                <span className="text-4xl sm:text-5xl font-black font-display text-white">A</span>
+              {/* Central Glowing Avatar Circle with Custom Logo */}
+              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-white/10 bg-white shadow-glowIndigo mb-6 group-hover:scale-105 transition-transform duration-500 relative flex items-center justify-center">
+                <img src="/logo.jpg" alt="Abhi Developer Logo" className="w-[85%] h-[85%] object-contain" />
                 {/* Floating ambient aura inside circle */}
-                <span className="absolute inset-0 rounded-full bg-white/10 animate-ping opacity-25" />
+                <span className="absolute inset-0 rounded-full bg-white/10 animate-ping opacity-25 pointer-events-none" />
               </div>
 
               {/* Three Pill Badges below Avatar (Fully Wrap-Safe and Responsive) */}

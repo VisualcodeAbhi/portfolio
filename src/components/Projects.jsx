@@ -25,35 +25,35 @@ const projects = [
     },
     liveUrl: "https://luxe-jewelers-five.vercel.app/",
     githubUrl: "https://github.com/VisualcodeAbhi/Portfolio",
-    desktopImg: "/projects/luxe_desktop.png",
-    mobileImg: "/projects/luxe_mobile.png",
+    desktopImg: "/projects/image.png",
+    mobileImg: "/projects/mimage.png",
     theme: "gold",
     featured: true,
   },
   {
     id: 2,
-    title: "Buyroute Marketplace",
-    tagline: "Robust Flask + MySQL Engine",
-    desc: "A multi-layered modern eCommerce platform featuring full backend relational database structures, custom administrative panels, shopping catalogs, and dynamic transaction flows.",
-    longDesc: "Buyroute is a full-featured commercial engine built with a secure Flask micro-framework and a robust relational MySQL database. It supports active session management, user credentials hashing, dynamic product catalog management, item filters, search algorithms, and custom client shopping carts.",
-    tech: ["Flask", "Python", "MySQL", "Tailwind CSS", "REST APIs"],
+    title: "NeuroAI",
+    tagline: "Next-Gen AI Platform",
+    desc: "A highly interactive, sleek AI platform landing page designed for creators, developers, and businesses to automate workflows, generate content, and scale with intelligence.",
+    longDesc: "NeuroAI is a next-generation AI interface featuring immersive hover cards, interactive tools showcase, dynamic glowing neon gradients, glassmorphism UI, and stellar performance optimization. Engineered with React and Tailwind CSS for flawless cross-device scalability and cinematic animations.",
+    tech: ["React.js", "Tailwind CSS", "Framer Motion", "Vite"],
     features: [
-      "Secure user authentication & credentials hashing",
-      "Relational MySQL tables mapping products to categories",
-      "Robust administrator inventory control dashboard",
-      "Live order cart session tracking",
-      "Interactive search optimization filtering"
+      "Stunning futuristic mesh-glow dark theme",
+      "Interactive features card grid with smooth hover transitions",
+      "Fluid animations powered by Framer Motion",
+      "Highly responsive layouts tailored for mobile, tablet, and desktop viewports",
+      "Optimized asset lazy-loading for lightning-fast performance"
     ],
     performance: {
-      score: 96,
-      ux: "Premium",
+      score: 98,
+      ux: "Elite",
       responsive: "A+",
-      status: "Build Completed"
+      status: "Production Ready"
     },
-    liveUrl: "#contact",
+    liveUrl: "https://ai-landing-page-inky.vercel.app/",
     githubUrl: "https://github.com/VisualcodeAbhi/Portfolio",
-    desktopImg: "/projects/buyroute_desktop.png",
-    mobileImg: "/projects/buyroute_mobile.png",
+    desktopImg: "/projects/neuroai_desktop.png",
+    mobileImg: "/projects/neuroai_mobile.png",
     theme: "blue",
     featured: false,
   },
@@ -147,7 +147,7 @@ const TiltMockup = ({ children, theme }) => {
         scale: isHovered ? 1.03 : 1,
       }}
       transition={{ type: "spring", stiffness: 120, damping: 14 }}
-      style={{ transformStyle: "preserve-3d" }}
+      style={{ transformStyle: "preserve-3d", perspective: 1200 }}
       className="relative w-full cursor-pointer"
     >
       <div 
@@ -229,7 +229,8 @@ const MobileMockup = ({ mobileImg, title }) => {
 
 // Cinematic Fullscreen Project Details Modal
 const ProjectModal = ({ project, onClose }) => {
-  const [activeTab, setActiveTab] = useState("desktop"); // desktop or mobile
+  const hasLiveDemo = project.liveUrl && project.liveUrl.startsWith("http");
+  const [activeTab, setActiveTab] = useState(hasLiveDemo ? "live" : "desktop");
 
   if (!project) return null;
 
@@ -256,7 +257,7 @@ const ProjectModal = ({ project, onClose }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 overflow-y-auto bg-black/90 backdrop-blur-md flex items-center justify-center p-4 md:p-6"
+      className="fixed inset-0 z-[100] overflow-y-auto bg-black/90 backdrop-blur-md flex items-start justify-center pt-24 pb-12 px-4 md:px-6"
     >
       <motion.div
         initial={{ scale: 0.9, y: 30, opacity: 0 }}
@@ -268,10 +269,11 @@ const ProjectModal = ({ project, onClose }) => {
         {/* Dynamic Glowing Mesh */}
         <div className={`absolute top-0 left-0 right-0 h-[220px] bg-gradient-to-b ${glowColor} blur-3xl pointer-events-none`} />
 
-        {/* Close Button */}
+        {/* Close Button - absolute inside the card which is safely pt-24 below the navbar */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2.5 rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-all shadow-md cursor-pointer"
+          className="absolute top-6 right-6 z-20 p-2.5 rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-all shadow-md cursor-pointer"
+          aria-label="Close Showroom"
         >
           <X className="w-5 h-5" />
         </button>
@@ -282,42 +284,64 @@ const ProjectModal = ({ project, onClose }) => {
             {/* Main Interactive Screen */}
             <div className="relative w-full aspect-[16/10] rounded-2xl border border-white/5 bg-[#050507] overflow-hidden shadow-premium">
               <AnimatePresence mode="wait">
-                <motion.img
-                  key={activeTab}
-                  src={activeTab === "desktop" ? project.desktopImg : project.mobileImg}
-                  alt={`${project.title} Preview`}
-                  initial={{ opacity: 0, x: activeTab === "desktop" ? -25 : 25 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: activeTab === "desktop" ? 25 : -25 }}
-                  transition={{ duration: 0.25 }}
-                  className={`w-full h-full ${activeTab === "desktop" ? "object-cover object-top" : "object-contain py-4 px-2"}`}
-                />
+                {activeTab === "live" ? (
+                  <iframe
+                    src={project.liveUrl}
+                    title={`${project.title} Live Interactive Demo`}
+                    className="w-full h-full border-none bg-neutral-950"
+                    sandbox="allow-scripts allow-same-origin allow-popups"
+                  />
+                ) : (
+                  <motion.img
+                    key={activeTab}
+                    src={activeTab === "desktop" ? project.desktopImg : project.mobileImg}
+                    alt={`${project.title} Preview`}
+                    initial={{ opacity: 0, x: activeTab === "desktop" ? -25 : 25 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: activeTab === "desktop" ? 25 : -25 }}
+                    transition={{ duration: 0.25 }}
+                    className={`w-full h-full ${activeTab === "desktop" ? "object-cover object-top" : "object-contain py-4 px-2"}`}
+                  />
+                )}
               </AnimatePresence>
             </div>
 
             {/* Thumbnail Tabs */}
-            <div className="flex gap-3 justify-center">
+            <div className="flex flex-wrap gap-2 justify-center">
+              {hasLiveDemo && (
+                <button
+                  onClick={() => setActiveTab("live")}
+                  className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
+                    activeTab === "live"
+                      ? `bg-white/5 ${borderColor} ${textThemeColor} shadow-[0_0_15px_rgba(6,182,212,0.15)]`
+                      : "bg-transparent border-transparent text-slate-500 hover:text-slate-300"
+                  }`}
+                >
+                  <Sparkles className="w-3.5 h-3.5 animate-pulse" />
+                  <span>Interactive Live Preview</span>
+                </button>
+              )}
               <button
                 onClick={() => setActiveTab("desktop")}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
                   activeTab === "desktop"
                     ? `bg-white/5 ${borderColor} ${textThemeColor}`
                     : "bg-transparent border-transparent text-slate-500 hover:text-slate-300"
                 }`}
               >
-                <Laptop className="w-4 h-4" />
-                <span>Desktop View</span>
+                <Laptop className="w-3.5 h-3.5" />
+                <span>Desktop Mockup</span>
               </button>
               <button
                 onClick={() => setActiveTab("mobile")}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
                   activeTab === "mobile"
                     ? `bg-white/5 ${borderColor} ${textThemeColor}`
                     : "bg-transparent border-transparent text-slate-500 hover:text-slate-300"
                 }`}
               >
-                <Smartphone className="w-4 h-4" />
-                <span>Mobile View</span>
+                <Smartphone className="w-3.5 h-3.5" />
+                <span>Mobile Mockup</span>
               </button>
             </div>
           </div>
@@ -526,7 +550,7 @@ export default function Projects() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.8 }}
-                className={`relative overflow-hidden rounded-[2.5rem] border border-white/5 bg-[#09090c]/80 p-8 md:p-12 shadow-premium grid grid-cols-1 lg:grid-cols-12 gap-12 items-center transition-all duration-500 ${borderHoverColor}`}
+                className={`relative overflow-hidden rounded-[2.5rem] border border-white/5 bg-[#09090c]/80 p-8 md:p-12 shadow-premium grid grid-cols-1 lg:grid-cols-12 gap-12 items-center transition-[border-color,box-shadow] duration-500 ${borderHoverColor}`}
               >
                 {/* Visual Accent flares */}
                 <div className={`absolute -top-12 -left-12 w-[250px] h-[250px] rounded-full blur-3xl pointer-events-none ${

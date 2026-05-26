@@ -20,6 +20,9 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-obsidian text-slate-100 font-sans antialiased;
     background-image: 
@@ -56,7 +59,8 @@
 
   /* High fidelity Glowing borders */
   .glow-card {
-    @apply relative overflow-hidden transition-all duration-500 rounded-2xl border border-white/5 bg-[#09090c]/70 hover:border-neonViolet/40 hover:shadow-glowViolet;
+    @apply relative overflow-hidden rounded-2xl border border-white/5 bg-[#09090c]/70 hover:border-neonViolet/40 hover:shadow-glowViolet;
+    transition: border-color 0.5s ease, box-shadow 0.5s ease;
   }
 
   /* Premium Gradient Text Utility */

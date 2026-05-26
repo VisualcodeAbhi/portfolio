@@ -42,10 +42,21 @@ export default function App() {
   const [hash, setHash] = useState(window.location.hash || "#/");
 
   useEffect(() => {
+    let prevHash = window.location.hash || "#/";
+
     const handleHashChange = () => {
-      setHash(window.location.hash || "#/");
-      // Instantly scroll to top when toggling pages
-      window.scrollTo({ top: 0, behavior: "instant" });
+      const currentHash = window.location.hash || "#/";
+      setHash(currentHash);
+      
+      const wasProjects = prevHash === "#/projects";
+      const isProjects = currentHash === "#/projects";
+
+      // Only scroll to top instantly if we are transitioning between the landing page and the projects showroom page
+      if (wasProjects !== isProjects) {
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }
+
+      prevHash = currentHash;
     };
 
     window.addEventListener("hashchange", handleHashChange);

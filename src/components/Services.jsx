@@ -112,7 +112,7 @@ export default function Services() {
                 key={idx}
                 variants={cardVariants}
                 whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                className={`glow-card p-8 flex flex-col justify-between items-start gap-6 shadow-premium transition-all duration-300 ${service.glowColor} ${
+                className={`glow-card p-8 flex flex-col justify-between items-start gap-6 shadow-premium ${service.glowColor} ${
                   isLast ? "md:col-span-2 lg:col-span-1" : ""
                 }`}
               >
