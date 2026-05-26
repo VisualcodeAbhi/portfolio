@@ -85,8 +85,8 @@ export default function Navbar({ currentPath }) {
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
           {/* Logo Brand */}
           <a href={isProjectsRoute ? "/#home" : "#home"} className="flex items-center gap-2 group">
-            <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-glowBlue transition-transform duration-300 group-hover:scale-105 overflow-hidden border border-white/10">
-              <img src="/logo.jpg" alt="Abhi Logo" className="w-[85%] h-[85%] object-contain" />
+            <div className="w-9 h-9 rounded-xl bg-transparent flex items-center justify-center shadow-glowBlue transition-transform duration-300 group-hover:scale-105 overflow-hidden">
+              <img src="/logo.jpg" alt="Abhi Logo" className="w-full h-full object-cover scale-115" />
             </div>
             <span className="font-display font-bold text-lg tracking-tight text-white select-none">
               Abhi <span className="text-neonBlue">Web</span>

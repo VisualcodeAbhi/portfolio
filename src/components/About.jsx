@@ -86,8 +86,8 @@ export default function About() {
               <div className="absolute -inset-1.5 bg-gradient-to-tr from-neonViolet to-neonBlue rounded-3xl blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-500 -z-10" />
               
               {/* Central Glowing Avatar Circle with Custom Logo */}
-              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-white/10 bg-white shadow-glowIndigo mb-6 group-hover:scale-105 transition-transform duration-500 relative flex items-center justify-center">
-                <img src="/logo.jpg" alt="Abhi Developer Logo" className="w-[85%] h-[85%] object-contain" />
+              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-white/10 bg-transparent shadow-glowIndigo mb-6 group-hover:scale-105 transition-transform duration-500 relative flex items-center justify-center">
+                <img src="/logo.jpg" alt="Abhi Developer Logo" className="w-full h-full object-cover scale-115" />
                 {/* Floating ambient aura inside circle */}
                 <span className="absolute inset-0 rounded-full bg-white/10 animate-ping opacity-25 pointer-events-none" />
               </div>

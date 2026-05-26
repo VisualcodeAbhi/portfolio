@@ -15,8 +15,8 @@ export default function Footer({ isProjectsPage }) {
         {/* Branding Brand */}
         <div className="flex flex-col items-center md:items-start gap-2">
           <a href={isProjectsPage ? "/#home" : "#home"} className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shadow-glowBlue transition-transform duration-300 group-hover:scale-105 overflow-hidden border border-white/10">
-              <img src="/logo.jpg" alt="Abhi Logo" className="w-[85%] h-[85%] object-contain" />
+            <div className="w-8 h-8 rounded-lg bg-transparent flex items-center justify-center shadow-glowBlue transition-transform duration-300 group-hover:scale-105 overflow-hidden">
+              <img src="/logo.jpg" alt="Abhi Logo" className="w-full h-full object-cover scale-115" />
             </div>
             <span className="font-display font-bold text-base tracking-tight text-white">
               Abhi <span className="text-neonBlue">Web</span>
